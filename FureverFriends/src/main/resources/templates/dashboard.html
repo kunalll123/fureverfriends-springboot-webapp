@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <style>
+        .stat-card {
+            transition: transform 0.3s ease;
+            min-height: 120px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-top: 10px;
+        }
+        .action-buttons .btn {
+            margin-right: 5px;
+            min-width: 80px;
+        }
+        .badge-status {
+            font-size: 0.9rem;
+            padding: 5px 10px;
+        }
+        .badge-pending {
+            background-color: #ffc107;
+        }
+        .badge-approved {
+            background-color: #198754;
+        }
+        .badge-rejected {
+            background-color: #dc3545;
+        }
+        .amount-cell {
+            font-weight: 600;
+            color: #198754;
+        }
+    </style>
+</head>
+<body class="bg-light">
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="mb-0">Admin Dashboard</h2>
+        <div class="text-muted" th:text="'Last updated: ' + ${#temporals.format(#temporals.createNow(), 'MMM dd, yyyy HH:mm')}"></div>
+    </div>
+
+    <ul class="nav nav-tabs" id="dashboardTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab">
+                <i class="bi bi-house-door"></i> Overview
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="donations-tab" data-bs-toggle="tab" data-bs-target="#donations" type="button" role="tab">
+                <i class="bi bi-cash-coin"></i> Donations
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="adoption-tab" data-bs-toggle="tab" data-bs-target="#adoptions" type="button" role="tab">
+                <i class="bi bi-heart"></i> Adoption Requests
+            </button>
+        </li>
+    </ul>
+
+    <div class="tab-content mt-4 p-3 bg-white rounded shadow-sm" id="dashboardTabContent">
+
+        <!-- Home Tab -->
+        <div class="tab-pane fade show active" id="home" role="tabpanel">
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <div class="card stat-card">
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-muted">Total Users</h5>
+                            <div class="stat-value text-primary" th:text="${userCount}">0</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card stat-card">
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-primary">Total Donations:
+<!-- Example: Display donation count -->
+                                 <div th:text="${donationCount}"></div> 
+                                </h5>                     
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card stat-card">
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-muted">Adoption Requests</h5>
+                            <div class="stat-value text-info" th:text="${adoptionCount}">0</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card stat-card">
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-muted">Bookings</h5>
+                            <div class="stat-value text-warning" th:text="${bookingCount}">0</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card stat-card">
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-muted">Contacts</h5>
+                            <div class="stat-value text-secondary" th:text="${contactCount}">0</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card stat-card">
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-muted">Treatments</h5>
+                            <div class="stat-value text-danger" th:text="${treatmentCount}">0</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header bg-primary text-white">
+                            Recent Adoption Requests
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Requester</th>
+                                            <th>Pet</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="request : ${recentAdoptions}">
+                                            <td th:text="${request.requester}">Alice</td>
+                                            <td th:text="${request.pet}">Tommy</td>
+                                            <td>
+                                                <span th:classappend="${request.status == 'Pending'} ? 'badge-pending' : 
+                                                                    ${request.status == 'Approved'} ? 'badge-approved' : 'badge-rejected'" 
+                                                      class="badge badge-status" th:text="${request.status}">Pending</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header bg-success text-white">
+                            Recent Donations
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Donor</th>
+                                            <th>Amount</th>
+                                            <th>Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="donation : ${recentDonations}">
+                                            <td th:text="${donation.fullName}">John Doe</td>
+                                            <td class="amount-cell" th:text="'$' + ${#numbers.formatDecimal(donation.amount, 1, 2)}">$100</td>
+                                            <td th:text="${#temporals.format(donation.donationDate, 'MMM dd')}">Jan 01</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Donations Tab -->
+        <div class="tab-pane fade" id="donations" role="tabpanel">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h4>Donation Records</h4>
+                <div class="input-group" style="width: 300px;">
+                    <input type="text" class="form-control" placeholder="Search donations...">
+                    <button class="btn btn-outline-secondary" type="button">Search</button>
+                </div>
+            </div>
+            
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>Donor</th>
+                            <th>Email</th>
+                            <th>Amount</th>
+                            <th>Type</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="donation : ${donations}">
+                            <td th:text="${donation.id}">1</td>
+                            <td th:text="${donation.address}">John Doe</td>
+                            <td th:text="${donation.email}">john@example.com</td>
+                            <td class="amount-cell" th:text="'$' + ${#numbers.formatDecimal(donation.amount, 1, 2)}">$100.00</td>
+                            <td th:text="${donation.purpose}">One-time</td>
+                            <td th:text="${#temporals.format(donation.donationDate, 'MMM dd, yyyy')}">Jan 01, 2023</td>
+                            <td>
+                                <span th:classappend="${donation.status == 'Completed'} ? 'badge bg-success' : 'badge bg-warning text-dark'" 
+                                      class="badge" th:text="${donation.status}">Completed</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <nav aria-label="Donation pagination" class="mt-3">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1">Previous</a>
+                    </li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">Next</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+
+        <!-- Adoption Requests Tab -->
+        <div class="tab-pane fade" id="adoptions" role="tabpanel">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h4>Adoption Requests</h4>
+                <div>
+                    <button class="btn btn-primary btn-sm me-2">
+                        <i class="bi bi-download"></i> Export
+                    </button>
+                    <button class="btn btn-secondary btn-sm">
+                        <i class="bi bi-funnel"></i> Filter
+                    </button>
+                </div>
+            </div>
+            
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>Requester</th>
+                            <th>Contact</th>
+                            <th>Pet Type</th>
+                            <th>Request Date</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="request : ${adoptionRequests}">
+                            <td th:text="${request.contact}">1001</td>
+                            <td th:text="${request.job}">Alice Johnson</td>
+                            <!-- <td th:text="${request.contactEmail}">alice@example.com</td>
+                            <td th:text="${request.petType}">Dog</td>
+                            <td th:text="${#temporals.format(request.requestDate, 'MMM dd, yyyy')}">Jan 15, 2023</td> -->
+                            <td>
+                                <span th:classappend="${request.status == 'Pending'} ? 'badge-pending' : 
+                                                        ${request.status == 'Approved'} ? 'badge-approved' : 'badge-rejected'" 
+                                      class="badge badge-status" th:text="${request.status}">Pending</span>
+                            </td>
+                            <td class="action-buttons">
+                                <button class="btn btn-success btn-sm" th:if="${request.status == 'Pending'}">
+                                    <i class="bi bi-check-circle"></i> Approve
+                                </button>
+                                <button class="btn btn-danger btn-sm" th:if="${request.status == 'Pending'}">
+                                    <i class="bi bi-x-circle"></i> Reject
+                                </button>
+                                <button class="btn btn-info btn-sm" th:if="${request.status != 'Pending'}">
+                                    <i class="bi bi-eye"></i> View
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="d-flex justify-content-between mt-3">
+                <div class="text-muted" th:text="'Showing ' + ${adoptionRequests.size()} + ' of ' + ${adoptionCount} + ' requests'">
+                    Showing 10 of 25 requests
+                </div>
+                <nav aria-label="Adoption pagination">
+                    <ul class="pagination">
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" tabindex="-1">Previous</a>
+                        </li>
+                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">Next</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap Icons -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Activate tooltips
+    document.addEventListener('DOMContentLoaded', function() {
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+    })
+</script>
+</body>
+</html>

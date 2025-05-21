@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help Injured Dogs</title>
+   
+     <!-- Favicon -->
+     <link th:href="@{/img/favicon.ico}" rel="icon">
+
+
+     <!-- Google Web Fonts -->
+     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet"> 
+ 
+     <!-- Font Awesome -->
+     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+         
+     <!-- Flaticon Font -->
+     <link th:href="@{/lib/flaticon/font/flaticon.css}" rel="stylesheet">
+ 
+     <!-- Libraries Stylesheet -->
+     <link th:href="@{/lib/owlcarousel/assets/owl.carousel.min.css}" rel="stylesheet">
+     <link th:href="@{/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css}" rel="stylesheet" />
+ 
+     <!-- Customized Bootstrap Stylesheet -->
+     <link th:href="@{/css/styles.css}" rel="stylesheet">
+     <link href="prioraction.css" rel="stylesheet">
+
+     
+     <style>
+     .con1 {
+    width: 80%;
+    max-width: 900px;
+    margin: 80px auto;
+    padding: 40px 20px;
+    position: relative;
+    animation: fadeIn 1.5s ease-in-out;
+    text-align: center;
+}
+.con1:nth-child(odd) {
+    background: #fff;
+    border-radius: 50px;
+    padding: 50px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.con1:nth-child(even) {
+    /* background: linear-gradient(135deg, #ff914d, #ff6600); */
+    background: white;
+    color: rgb(0, 0, 0);
+    border-radius: 50px;
+    padding: 50px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+
+.heading {
+    font-size: 30px;
+    font-weight: bold;
+    position: relative;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+
+.container:nth-child(even) .heading {
+    text-shadow: 2px 2px 15px rgba(255, 255, 255, 0.7);
+}
+
+
+.heading::after {
+    content: "";
+    width: 80px;
+    height: 4px;
+    background: #008000;
+    display: block;
+    margin: 10px auto;
+    border-radius: 2px;
+}
+
+
+.paragraph {
+    font-size: 18px;
+    margin-bottom: 20px;
+    opacity: 0.9;
+}
+
+
+ul {
+    font-size: 18px;
+    list-style: none;
+    padding-left: 0;
+}
+
+
+li {
+    margin: 15px 0;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    font-weight: 500;
+    transition: transform 0.4s ease, background 0.3s ease;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.6s forwards ease-in-out;
+}
+
+
+li:nth-child(1) { animation-delay: 0.3s; }
+li:nth-child(2) { animation-delay: 0.5s; }
+li:nth-child(3) { animation-delay: 0.7s; }
+li:nth-child(4) { animation-delay: 0.9s; }
+li:nth-child(5) { animation-delay: 1.1s; }
+
+
+li::before {
+    content: "✔";
+    font-size: 20px;
+    color: #008000;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+li:hover {
+    background: rgba(0, 128, 0, 0.1);
+    transform: scale(1.05);
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+      </style>
+</head>
+
+
+<body>
+    <!-- Topbar Start -->
+   <div class="container-fluid">
+    <div class="row bg-secondary py-2 px-lg-5">
+        <div class="col-lg-6 text-center text-lg-left mb-2 mb-lg-0">
+            <div class="d-inline-flex align-items-center">
+                <a class="text-white pr-3" href="">FAQs</a>
+                <span class="text-white">|</span>
+                <a class="text-white px-3" href="">Help</a>
+                <span class="text-white">|</span>
+                <a class="text-white pl-3" href="">Support</a>
+            </div>
+        </div>
+        <div class="col-lg-6 text-center text-lg-right">
+            <div class="d-inline-flex align-items-center">
+                <a class="text-white px-3" href="">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a class="text-white px-3" href="">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a class="text-white px-3" href="">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a class="text-white px-3" href="">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a class="text-white pl-3" href="">
+                    <i class="fab fa-youtube"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="row py-3 px-lg-5">
+        <div class="col-lg-4">
+            <a href="" class="navbar-brand d-none d-lg-block">
+                <h1 class="m-0 display-5 text-capitalize"><span class="text-primary">Furever</span>Friends</h1>
+            </a>
+        </div>
+        <div class="col-lg-8 text-center text-lg-right">
+            <div class="d-inline-flex align-items-center">
+                <div class="d-inline-flex flex-column text-center pr-3 border-right">
+                    <h6></h6>
+                    <p class="m-0"></p>
+                </div>
+                <div class="d-inline-flex flex-column text-center px-3 border-right">
+                    <h6>Email Us</h6>
+                    <p class="m-0">fureverfriends111@gmail.com</p>
+                </div>
+                <div class="d-inline-flex flex-column text-center pl-3">
+                    <h6>Call Us</h6>
+                    <p class="m-0">+012 345 6789</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Topbar End -->
+
+
+<!-- Navbar Start -->
+<div class="container-fluid p-0">
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-lg-5">
+        <a href="" class="navbar-brand d-block d-lg-none">
+            <h1 class="m-0 display-5 text-capitalize font-italic text-white"><span class="text-primary">Safety</span>First</h1>
+        </a>
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
+            <div class="navbar-nav mr-auto py-0">
+                <a href="index" class="nav-item nav-link active">Home</a>
+                <a href="about" class="nav-item nav-link">About us</a>
+                <a href="service" class="nav-item nav-link">Service</a>
+                <a href="donationform" class="nav-item nav-link">Donation</a>
+                <a href="rescue" class="nav-item nav-link">Rescue</a>
+                
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Adoption</a>
+                    <div class="dropdown-menu rounded-0 m-0">
+                        <a href="dogadoption" class="dropdown-item">Dog Breeds</a>
+                        <a href="catadoption" class="dropdown-item">Cat Breed</a>
+                        <a href="birdadoption" class="dropdown-item">Bird Breed</a>
+                    </div>
+                </div>
+                <a href="contact" class="nav-item nav-link">Contact</a>
+            </div>
+            <a href="profile" id="profileBtn" class="btn btn-lg px-3 d-none d-lg-block">
+                <img style="margin: 0px 10px 0px 0px;width: 85px;height: 65px;" src="/img/usericon.png" alt="">
+            </a>
+           
+        </div>
+
+
+        
+    </nav>
+</div>
+<!-- Navbar End -->
+
+
+
+    <div class="con1">
+        <h1 class="heading">How to Help Injured Dogs</h1>
+        <p class="paragraph">If you find an injured dog on the street, follow these steps:</p>
+        <ul>
+            <li>Approach the dog slowly and calmly to avoid scaring it.</li>
+            <li>Check for visible injuries but avoid touching open wounds.</li>
+            <li>Provide clean water and some soft food if the dog is hungry.</li>
+            <li>Contact a local animal rescue or veterinarian for immediate help.</li>
+            <li>If possible, transport the dog to a vet safely.</li>
+        </ul>
+    </div>
+    <div class="con1">
+        <h1 class="heading">How to Help Injured Cats</h1>
+        <p class="paragraph">If you find an injured cat, follow these steps:</p>
+        <ul>
+            <li>Observe the cat from a distance to assess its condition.</li>
+            <li>Use a soft cloth or towel to gently pick up the cat if it's safe.</li>
+            <li>Keep the cat warm and quiet in a safe space.</li>
+            <li>Contact a vet or animal rescue service immediately.</li>
+            <li>Do not attempt to force-feed the cat if it appears weak.</li>
+        </ul>
+    </div>
+    <div class="con1">
+        <h1 class="heading">How to Help Injured Birds</h1>
+        <p class="paragraph">If you find an injured bird, take these actions:</p>
+        <ul>
+            <li>Gently pick up the bird using a soft cloth.</li>
+            <li>Place it in a ventilated box lined with soft fabric.</li>
+            <li>Keep it in a quiet and warm place away from noise.</li>
+            <li>Provide water but do not force-feed.</li>
+            <li>Contact a wildlife rehabilitation center for further help.</li>
+        </ul>
+    </div>
+</body>
+</html>

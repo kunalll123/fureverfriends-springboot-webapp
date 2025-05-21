@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Training Booking Form</title>
+    <link th:href="@{/css/styles.css}" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: url("../loginImages/catg1.jpg");          
+            display: flex;
+            justify-content: center;
+            align-items: center;
+           
+            padding: 20px;
+            background-size: cover; /* Cover the entire area */
+            background-repeat: no-repeat; /* Prevent repeating */
+            background-position: center center; /
+        }
+
+        .container {
+
+            background: rgba(32, 32, 32, 0.2); /* Transparent background */
+            backdrop-filter: blur(10px); /* Glassmorphism effect */
+            padding: 20px;
+            /* box-sizing: 30px; */
+            border: 2px solid white;
+            border-radius: 50px;
+            border-color: #ffffff;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            width: 1000px;
+            text-align: center;
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            color: rgb(255, 255, 255);
+            margin-bottom: 10px;
+            padding-top: 30px;
+        }
+
+        p {
+            color: rgb(255, 255, 255);
+            font-size: 14px;
+            
+        }
+
+        label {
+            display: block;
+            text-align: left;
+            font-weight: 600;
+            margin-top: 10px;
+            color: #fff;
+        }
+
+        input, textarea {
+            width: 100%;
+      
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid white;
+            border-radius: 5px;
+            transition: 0.3s;
+            font-size: 14px;
+            background: rgba(128, 128, 128, 0.2); 
+            color: #ffffff;
+        }
+         
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 2px solid rgba(215, 208, 208, 0.2);
+            border-radius: 5px;
+            transition: 0.3s;
+            font-size: 14px;
+            background: rgba(52, 51, 51, 0.7);
+            color: #ffffff; /* White text */
+}
+
+        select:focus {
+            border-color: #fff;
+            outline: none;
+            box-shadow: 0px 0px 5px rgba(255, 255, 255, 0.5);
+            background: rgba(0, 0, 0, 0.8); /* Even darker when focused */
+        }
+
+
+        select option {
+            background: rgba(50, 50, 50, 0.9); /* Darker background for options */
+            color: #ffffff; /* White text */
+        }
+
+        input:focus, textarea:focus{
+            border-color: rgba(168, 168, 168, 0.2);;
+            outline: none;
+            box-shadow: 0px 0px 5px rgba(137, 136, 136, 0.5);
+        }
+       
+        button {
+            padding: 12px;
+            margin-top: 15px;
+            border: none;
+            border-radius: 5px;
+            background: #ff5c5c;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #ff9966;
+            transform: scale(1.05);
+        }
+        textarea::placeholder {
+           color: #f2f2f2;
+       }
+      
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Pet Training Booking Form</h2>
+        <form id="bookingForm">
+            <label for="ownerName">Owner's Name:</label>
+            <input type="text" id="ownerName" name="ownerName" required>
+
+            <label for="petName">Pet's Name:</label>
+            <input type="text" id="petName" name="petName" required>
+
+            <label for="petType">Pet Type:</label>
+            <select id="petType" name="petType" required>
+                <option value="dog">Dog</option>
+                <option value="cat">Cat</option>
+                <option value="other">Birds</option>
+            </select>
+
+            <label for="trainingType">Training Type:</label>
+            <select id="trainingType" name="trainingType" required>
+                <option value="obedience">Obedience Training</option>
+                <option value="agility">Agility Training</option>
+                <option value="behavioral">Behavioral Training</option>
+            </select>
+
+            <label for="date">Preferred Training Date:</label>
+            <input type="date" id="date" name="preferredDate" required>
+
+            <label for="time">Preferred Time:<span style="color: rgb(203, 56, 56);">*</span></label>
+            <input type="time" id="time" name="preferredTime" required>
+
+            <button type="submit">Book Appointment</button>
+            <a href="index"><button type="button" style="width: 200px;">Back</button></a>
+        </form>
+        <p id="confirmationMessage"></p>
+    </div>
+
+    <script th:src="@{/js/script.js}"></script>
+
+    <script>
+       document.getElementById("bookingForm").addEventListener("submit", async function (event) {
+    event.preventDefault(); // Prevent default form submission
+
+    let ownerName = document.getElementById("ownerName").value.trim();
+    let petName = document.getElementById("petName").value.trim();
+    let petType = document.getElementById("petType").value;
+    let trainingType = document.getElementById("trainingType").value;
+    let preferredDate = document.getElementById("date").value;
+    let preferredTime = document.getElementById("time").value
+
+    if (!ownerName || !petName || !petType || !trainingType || !preferredDate || !preferredTime ){
+        alert("⚠️ Please fill in all required fields before submitting.");
+        return;s
+    }
+
+    let bookingData = {
+        ownerName: ownerName,
+        petName: petName,
+        petType: petType,
+        trainingType: trainingType,
+        preferredDate: preferredDate,
+        preferredTime: preferredTime
+    };
+
+    try {
+        let response = await fetch("http://localhost:9090/api/bookings", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(bookingData)
+        });
+
+        if (response.ok) {
+            let result = await response.json();
+            alert("✅ Training appointment booked successfully!");
+            this.reset(); // Reset form after successful submission
+            fetchBookings(); // Refresh booking list
+        } else {
+            let error = await response.json();
+            alert("❌ " + error.message);
+        }
+    } catch (error) {
+        alert("❌ An error occurred while booking the training appointment.");
+        console.error("Error:", error);
+    }
+});
+
+// Fetch all bookings and display them in console
+async function fetchBookings() {
+    try {
+        let response = await fetch("http://localhost:9090/api/bookings");
+        if (response.ok) {
+            let bookings = await response.json();
+            console.log("Training Bookings:", bookings);
+        } else {
+            console.error("Failed to fetch bookings");
+        }
+    } catch (error) {
+        console.error("Error fetching bookings:", error);
+    }
+}
+
+// Load existing bookings on page load
+window.onload = fetchBookings;
+
+    </script>
+</body>
+</html>

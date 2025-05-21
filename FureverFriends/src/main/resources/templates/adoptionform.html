@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Adoption Form</title>
+    <link th:href="@{/css/styles.css}" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+          
+            padding: 20px;
+            background: url("../loginImages/dog7.jpg");
+
+            background-size: cover;
+            color: white; 
+            background-size: cover; /* Cover the entire area */
+            background-repeat: no-repeat; /* Prevent repeating */
+            background-position: center center; /
+        }
+        h2{
+            text-align: center;
+            color: white;
+        }
+        .container {
+            background: rgba(128, 128, 128, 0.2); /* Transparent background */
+            backdrop-filter: blur(10px); /* Glassmorphism effect */
+            padding: 20px;
+            padding-top: 60px;
+            border: 2px solid white;
+            border-radius: 20px;
+            border-color: #e4e4e4;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            width: 1000px;
+            text-align:left;
+            animation: fadeIn 0.8s ease-in-out;
+            color: white;
+        }
+        label {
+            font-weight: bold;
+            color: white;
+        }
+        input, textarea {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 8px;
+            border: 1px solid white;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white; 
+        }
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 2px solid rgba(215, 208, 208, 0.2);
+            border-radius: 5px;
+            transition: 0.3s;
+            font-size: 14px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff; /* White text */
+        }
+
+        select:focus {
+            border-color: #fff;
+            border: 1px solid white;
+            outline: none;
+            box-shadow: 0px 0px 5px rgba(255, 255, 255, 0.5);
+        }
+
+
+        select option {
+            background: rgba(50, 50, 50, 0.9); 
+            color: #ffffff; 
+        }
+        input::placeholder, textarea::placeholder {
+            color: rgba(255, 255, 255, 0.7); 
+        }
+        .radio-group {
+            display: flex;
+            gap: 20px; 
+            align-items: center;
+        }
+
+        .radio-group label {
+            display: flex;
+            align-items: center;
+            gap: 3px; 
+            cursor: pointer;
+            color: white;
+        }
+
+        .radio-group input[type="radio"] {
+            margin: 0; 
+            width: 16px; 
+            height: 16px; 
+        }
+
+    
+        button {
+            padding: 12px;
+            
+            border: none;
+            border-radius: 5px;
+            background: #ff5c5c;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #ff9966;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Pet Adoption Form</h2>
+        <form id="adoptionForm">
+            <label for="fullName">Pet Name (if applicable):<span style="color: rgb(203, 56, 56);">*</span></label>
+            <input type="text" id="petName" name="petName">
+
+            <label for="petType">Preferred Pet Type: <span style="color: rgb(203, 56, 56);">*</span></label>
+            <select id="petType" name="petType" required>
+                <option value="" disabled selected>Pet Type</option>
+                <option value="Dog">Dog</option>
+                <option value="Cat">Cat</option>
+                <option value="Bird">Bird</option>
+            </select>
+
+            <label for="petName">Pet Name (if applicable):<span style="color: rgb(203, 56, 56);">*</span></label>
+            <input type="text" id="petName" name="petName">
+
+            <label for="ownersjob">Job<span style="color: rgb(203, 56, 56);">*</span></label>
+            <input type="text" id="job" name="job">
+
+            <label>Have You Owned Pets Before?</label>
+            <div class="radio-group">
+                <input type="radio" id="ownedYes" name="ownedBefore" value="Yes" required>
+                <label for="ownedYes">Yes</label>
+                <input type="radio" id="ownedNo" name="ownedBefore" value="No" required>
+                <label for="ownedNo">No</label>
+            </div>
+
+            <label>Do You Have Other Pets at Home?</label>
+            <div class="radio-group">
+                <input type="radio" id="otherPetsYes" name="otherPets" value="Yes" required>
+                <label for="otherPetsYes">Yes</label>
+                <input type="radio" id="otherPetsNo" name="otherPets" value="No" required>
+                <label for="otherPetsNo">No</label>
+            </div>
+
+            <label for="homeStatus">Do You Rent or Own Your Home?</label>
+            <select id="homeStatus" name="homeStatus" required>
+                <option value="Rent">Rent</option>
+                <option value="Own">Own</option>
+            </select>
+
+            <div id="landlordPermissionSection" style="display: none;">
+                <label>Do You Have Landlord's Permission?</label>
+                <div class="radio-group">
+                    <input type="radio" id="landlordYes" name="landlordPermission" value="Yes">
+                    <label for="landlordYes">Yes</label>
+                    <input type="radio" id="landlordNo" name="landlordPermission" value="No">
+                    <label for="landlordNo">No</label>
+                </div>
+            </div>
+
+            <label for="householdMembers">Household Members (Number of people at home):</label>
+            <input type="number" id="householdMembers" name="householdMembers" required>
+
+            <label>Do Any Household Members Have Allergies to Pets?<span style="color: rgb(203, 56, 56);">*</span></label>
+            <div class="radio-group">
+                <input type="radio" id="allergiesYes" name="allergies" value="Yes" required>
+                <label for="allergiesYes">Yes</label>
+                <input type="radio" id="allergiesNo" name="allergies" value="No" required>
+                <label for="allergiesNo">No</label>
+            </div>
+
+            <label for="adoptionReason">Why Do You Want to Adopt?<span style="color: rgb(203, 56, 56);">*</span></label>
+            <textarea id="adoptionReason" name="adoptionReason" rows="4" required></textarea>
+
+            <label>Do You Agree to a Home Visit?<span style="color: rgb(203, 56, 56);">*</span></label>
+            <div class="radio-group">
+                <input type="radio" id="homeVisitYes" name="homeVisit" value="Yes" required>
+                <label for="homeVisitYes">Yes</label>
+                <input type="radio" id="homeVisitNo" name="homeVisit" value="No" required>
+                <label for="homeVisitNo">No</label>
+            </div>
+
+            <label for="reference">Reference Contact Information (Phone/Email):<span style="color: rgb(203, 56, 56);">*</span></label>
+            <input type="text" id="contact" name="contact" required>
+
+            <button type="submit">Submit Application</button>
+            <a href="index"><button type="button" style="width: 200px;">Back</button></a>
+        </form>
+    </div>
+
+    <script>
+       // Toggle landlord permission section based on home status selection
+document.getElementById('homeStatus').addEventListener('change', function() {
+    const landlordSection = document.getElementById('landlordPermissionSection');
+    landlordSection.style.display = (this.value === 'Rent') ? 'block' : 'none';
+});
+
+// Handle Adoption Form Submission
+document.getElementById("adoptionForm").addEventListener("submit", function(event) {
+    event.preventDefault(); // Prevent default form submission
+
+    // Collect form data
+   // Handle Adoption Form Submission
+document.getElementById("adoptionForm").addEventListener("submit", function(event) {
+    event.preventDefault(); // Prevent default form submission
+
+    // Collect form data and convert string values to boolean where applicable
+    const formData = {
+        
+        petType: document.getElementById("petType").value,
+        petName: document.getElementById("petName").value,
+        job: document.getElementById("job").value,
+        ownedPets: document.querySelector('input[name="ownedBefore"]:checked')?.value === "Yes",  // Convert "Yes" -> true, "No" -> false
+        otherPets: document.querySelector('input[name="otherPets"]:checked')?.value === "Yes",  // Convert "Yes" -> true, "No" -> false
+        rentOrOwn: document.getElementById("homeStatus").value,
+        members: parseInt(document.getElementById("householdMembers").value, 10),
+        allergies: document.querySelector('input[name="allergies"]:checked')?.value === "Yes",  // Convert "Yes" -> true, "No" -> false
+        adoptreason: document.getElementById("adoptionReason").value,
+        homeVisit: document.querySelector('input[name="homeVisit"]:checked')?.value === "Yes",  // Convert "Yes" -> true, "No" -> false
+        contact: document.getElementById("contact").value
+    };
+
+    // Basic validation (Check for required fields)
+    if (!formData.petType || !formData.petName || !formData.job || !formData.adoptreason || !formData.contact) {
+        alert("Please fill in all required fields.");
+        return;
+    }
+
+    // Send data to backend
+    fetch("http://localhost:9090/adoption/addAdoption", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formData)
+    })
+    .then(response => {
+        if (!response.ok) {
+            return response.json().then(err => { throw err; });
+        }
+        return response.json();
+    })
+    .then(data => {
+        alert("Adoption Request Submitted Successfully!");
+        document.getElementById("adoptionForm").reset(); // Reset form after submission
+    })
+    .catch(error => {
+        console.error("Error:", error);
+        alert("Error submitting the form. Please try again.");
+    });
+});
+
+
+});
+
+    </script>
+    
+</body>
+</html>

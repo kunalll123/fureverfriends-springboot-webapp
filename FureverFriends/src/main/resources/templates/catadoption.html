@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adoption Portal</title>
+    <style>
+        
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .navigationbar {
+            background-color: #e5d1c7;
+            padding: 15px;
+            text-align: center;
+        }
+        .navigationbar h2 {
+            color: rgb(0, 0, 0);
+            font-size: 1.5em;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            text-align: center;
+        }
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+        .card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        .card-content {
+            padding: 15px;
+        }
+        .card-title {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .card-description {
+            font-size: 1em;
+            color: #666;
+        }
+        .card .adopt-btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .adopt-btn:hover {
+            background: #0056b3;
+        }
+        @media (max-width: 1024px) {
+            .card-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (max-width: 768px) {
+            .card-container {
+                grid-template-columns: repeat(1, 1fr);
+            }
+        }
+    </style>
+       <!-- Favicon -->
+       <link th:href="@{/img/favicon.ico}" rel="icon">
+
+
+       <!-- Google Web Fonts -->
+       <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet"> 
+   
+       <!-- Font Awesome -->
+       <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+           
+       <!-- Flaticon Font -->
+       <link th:href="@{/lib/flaticon/font/flaticon.css}" rel="stylesheet">
+   
+       <!-- Libraries Stylesheet -->
+       <link th:href="@{/lib/owlcarousel/assets/owl.carousel.min.css}" rel="stylesheet">
+       <link th:href="@{/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css}" rel="stylesheet" />
+   
+       <!-- Customized Bootstrap Stylesheet -->
+       <link th:href="@{/css/styles.css}" rel="stylesheet">
+</head>
+<body>
+
+     <!-- Topbar Start -->
+     <div class="container-fluid">
+        <div class="row bg-secondary py-2 px-lg-5">
+            <div class="col-lg-6 text-center text-lg-left mb-2 mb-lg-0">
+                <div class="d-inline-flex align-items-center">
+                    <a class="text-white pr-3" href="">FAQs</a>
+                    <span class="text-white">|</span>
+                    <a class="text-white px-3" href="">Help</a>
+                    <span class="text-white">|</span>
+                    <a class="text-white pl-3" href="">Support</a>
+                </div>
+            </div>
+            <div class="col-lg-6 text-center text-lg-right">
+                <div class="d-inline-flex align-items-center">
+                    <a class="text-white px-3" href="">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a class="text-white px-3" href="">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a class="text-white px-3" href="">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a class="text-white px-3" href="">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a class="text-white pl-3" href="">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row py-3 px-lg-5">
+            <div class="col-lg-4">
+                <a href="" class="navbar-brand d-none d-lg-block">
+                    <h1 class="m-0 display-5 text-capitalize"><span class="text-primary">Furever</span>Friends</h1>
+                </a>
+            </div>
+            <div class="col-lg-8 text-center text-lg-right">
+                <div class="d-inline-flex align-items-center">
+                    <div class="d-inline-flex flex-column text-center pr-3 border-right">
+                        <h6></h6>
+                        <p class="m-0"></p>
+                    </div>
+                    <div class="d-inline-flex flex-column text-center px-3 border-right">
+                        <h6>Email Us</h6>
+                        <p class="m-0">fureverfriends111@gmail.com</p>
+                    </div>
+                    <div class="d-inline-flex flex-column text-center pl-3">
+                        <h6>Call Us</h6>
+                        <p class="m-0">+012 345 6789</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Topbar End -->
+    
+    
+    <!-- Navbar Start -->
+    <div class="container-fluid p-0">
+        <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-lg-5">
+            <a href="" class="navbar-brand d-block d-lg-none">
+                <h1 class="m-0 display-5 text-capitalize font-italic text-white"><span class="text-primary">Safety</span>First</h1>
+            </a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
+                <div class="navbar-nav mr-auto py-0">
+                    <a href="index" class="nav-item nav-link ">Home</a>
+                    <a href="about" class="nav-item nav-link">About us</a>
+                    <a href="service" class="nav-item nav-link">Service</a>
+                    <a href="donationform" class="nav-item nav-link">Donation</a>
+                    <a href="rescue" class="nav-item nav-link">Rescue</a>
+                    
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle active" data-toggle="dropdown">Adoption</a>
+                        <div class="dropdown-menu rounded-0 m-0">
+                            <a href="dogadoption" class="dropdown-item">Dog Breeds</a>
+                            <a href="catadoption" class="dropdown-item">Cat Breed</a>
+                            <a href="birdadoption" class="dropdown-item">Bird Breed</a>
+                        </div>
+                    </div>
+                    <a href="contact" class="nav-item nav-link">Contact</a>
+                </div>
+                <a href="profile" id="profileBtn" class="btn btn-lg px-3 d-none d-lg-block">
+                    <img style="margin: 0px 10px 0px 0px;width: 85px;height: 65px;" src="/img/usericon.png" alt="">
+                </a>
+                <!-- <a href="login" id="loginBtn" class="btn btn-lg btn-primary px-3 d-none d-lg-block">Login</a> -->
+               
+            </div>
+    
+    
+            
+        </nav>
+    </div>
+<!-- Navbar End -->
+    <div class="navigationbar">
+     <h2>Find Your Perfect Match</h2>
+    </div>
+    <div class="container">
+        
+        <div class="card-container">
+            <div class="card">
+                <img src="/loginImages/res5.jpg" alt="Pet 1">
+                <div class="card-content">
+                    <h2 class="card-title">Leo</h2>
+                    <p class="card-description">A playful and loving kitten looking for a home.</p>
+                    <a href="cdetails1" class="adopt-btn">Know More</a>
+                </div>
+            </div>
+            <div class="card">
+                <img src="/loginImages/res2.jpeg" alt="Pet 2">
+                <div class="card-content">
+                    <h2 class="card-title">Daisy and Whisker</h2>
+                    <p class="card-description">A curious little explorer ready to find a loving home!</p>
+                    <a href="cdetails2" class="adopt-btn">Know More</a>
+                </div>
+            </div>
+            <div class="card">
+                <img src="/loginImages/res4.jpg" alt="Pet 3">
+                <div class="card-content">
+                    <h2 class="card-title">Luna</h2>
+                    <p class="card-description">Full of cuddles and mischief, waiting for a forever family!</p>
+                    <a href="cdetails3" class="adopt-btn">Know More</a>
+                </div>
+            </div>
+            <div class="card">
+                <img src="/loginImages/c1.jpg" alt="Pet 4">
+                <div class="card-content">
+                    <h2 class="card-title">Simba</h2>
+                    <p class="card-description">A tiny ball of energy looking for a warm lap to snuggle in!</p>
+                    <a href="cdetails4" class="adopt-btn">Know More</a>
+                </div>
+            </div>
+            <div class="card">
+                <img src="/loginImages/c2.jpg" alt="Pet 5">
+                <div class="card-content">
+                    <h2 class="card-title">Lizzy</h2>
+                    <p class="card-description">Sweet, playful, and full of purrs—adopt me today!</p>
+                    <a href="cdetails5" class="adopt-btn">Know More</a>
+                </div>
+            </div>
+            <div class="card">
+                <img src="/loginImages/c5.jpg" alt="Pet 6">
+                <div class="card-content">
+                    <h2 class="card-title">Brownie</h2>
+                    <p class="card-description">A fluffy bundle of joy waiting to brighten your life!</p>
+                    <a href="cdetails6" class="adopt-btn">Know More</a>
+                </div>
+            </div>
+            <div class="card">
+                <img src="/loginImages/c4.jpg" alt="Pet 7">
+                <div class="card-content">
+                    <h2 class="card-title">Coco</h2>
+                    <p class="card-description">Playful, affectionate, and ready to be your best friend!</p>
+                    <a href="cdetails7" class="adopt-btn">Know More</a>
+                </div>
+            </div>
+            <div class="card">
+                <img src="/loginImages/c3.jpg" alt="Pet 8">
+                <div class="card-content">
+                    <h2 class="card-title">Cloie</h2>
+                    <p class="card-description">Small paws, big heart—bring me home!</p>
+                    <a href="cdetails8" class="adopt-btn">Know More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+     <!-- Footer Start -->
+     <div class="container-fluid bg-dark text-white mt-5 py-5 px-sm-3 px-md-5">
+        <div class="row pt-5">
+            <div class="col-lg-4 col-md-12 mb-5">
+                <h1 class="mb-3 display-5 text-capitalize text-white"><span class="text-primary">Furever</span>Friends</h1>
+                <p class="m-0"></p>
+            </div>
+            <div class="col-lg-8 col-md-12">
+                <div class="row">
+                    <div style="margin: 0px 0px 0px 50px;" class="col-md-4 mb-5">
+                        <h5 class="text-primary mb-4">Get In Touch</h5>
+                        <p><i class="fa fa-map-marker-alt mr-2"></i>Fc Road, Pune,India</p>
+                        <p><i class="fa fa-phone-alt mr-2"></i>+012 345 67890</p>
+                        <p><i class="fa fa-envelope mr-2"></i>fureverfriends111@gmail.com</p>
+                        <div class="d-flex justify-content-start mt-4">
+                            <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 36px; height: 36px;" href="#"><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 36px; height: 36px;" href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 36px; height: 36px;" href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 36px; height: 36px;" href="#"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                    <div style="margin: 0px 0px 0px 200px;" class="col-md-4 mb-5">
+                        <h5 class="text-primary mb-4">Popular Links</h5>
+                        <div class="d-flex flex-column justify-content-start">
+                            <a class="text-white mb-2" href="index"><i class="fa fa-angle-right mr-2"></i>Home</a>
+                            <a class="text-white mb-2" href="about"><i class="fa fa-angle-right mr-2"></i>About Us</a>
+                            <a class="text-white mb-2" href="service"><i class="fa fa-angle-right mr-2"></i>Our Services</a>
+                            <!-- <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Team</a> -->
+                            <a class="text-white" href="contact"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
+                        </div>
+                    </div>
+                    <!--  submit from  <div class="col-md-4 mb-5">
+                        <h5 class="text-primary mb-4">Newsletter</h5>
+                        <form action="">
+                            <div class="form-group">
+                                <input type="text" class="form-control border-0" placeholder="Your Name" required="required" />
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control border-0" placeholder="Your Email" required="required" />
+                            </div>
+                            <div>
+                                <button class="btn btn-lg btn-primary btn-block border-0" type="submit">Submit Now</button>
+                            </div>
+                        </form>
+                    </div> -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid text-white py-4 px-sm-3 px-md-5" style="background: #111111;">
+        <div class="row">
+            <div class="col-md-6 text-center text-md-left mb-3 mb-md-0">
+                <p class="m-0 text-white">
+                    &copy; <a class="text-white font-weight-bold" href="https://freewebsitecode.com">2024 FureverFriends</a>. All Rights Reserved.
+                    <!-- <a class="text-white font-weight-bold" href="https://freewebsitecode.com">Free Website Code</a> -->
+                </p>
+            </div>
+            <div class="col-md-6 text-center text-md-right">
+                <ul class="nav d-inline-flex">
+                    <li class="nav-item">
+                        <a class="nav-link text-white py-0" href="#">Privacy</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white py-0" href="#">Terms</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white py-0" href="#">FAQs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white py-0" href="#">Help</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+      <!-- JavaScript Libraries -->
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script th:src="@{/lib/easing/easing.min.js}"></script>
+    <script th:src="@{/lib/owlcarousel/owl.carousel.min.js}"></script>
+    <script th:src="@{/lib/tempusdominus/js/moment.min.js}"></script>
+    <script th:src="@{/lib/tempusdominus/js/moment-timezone.min.js}"></script>
+    <script th:src="@{/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js}"></script>
+
+
+    <!-- Contact Javascript File -->
+    <script th:src="@{/mail/jqBootstrapValidation.min.js}"></script>
+    <script th:src="@{/mail/contact.js}"></script>
+
+    <!-- Template Javascript -->
+    <script th:src="@{/js/main.js}"></script>
+    <script th:src="@{/js/script.js}"></script>
+</body>
+</html>
